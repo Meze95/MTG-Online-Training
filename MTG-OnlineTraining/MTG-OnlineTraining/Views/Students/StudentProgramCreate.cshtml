@@ -1,0 +1,48 @@
+﻿@model MTG_OnlineTraining.ViewModel.StudentProgramsViewModel
+
+@{
+    ViewData["Title"] = "Add Program Page";
+    Layout = "~/Views/Shared/StudentLayout/_Layout.cshtml";
+}
+
+<partial name="_notification" />
+
+    <div class=" p-3 bg-white">
+        <form  asp-action="StudentProgramCreate" asp-controller="Students">
+            <div class="row py-2 justify-content-center">
+                <div class="col-10 border my-5 formProgCreat">
+                    <div class="row justify-content-center p-5 bg-light formProgCreat">
+                        <div class="col-10 bg-light formProgCreat-IN">
+                            <div class="my-4">
+                               <h2 class="text-primary text-center">Add Program</h2>
+                               <hr />
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Program Name</label>
+                                <select class="form-control custom-select" asp-for="AdminProgramId" asp-items="@(new SelectList(@ViewBag.AllProgram,  "Id", "ProgramName" ))"></select>
+                                <span class="text-danger" asp-for="AdminProgramId"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Mode Of Training</label>
+                                <select class="form-control custom-select" asp-for="ModeOfTraining" asp-items="@(new SelectList(@ViewBag.ModeOfTraining,  "Id", "Name" ))"></select>
+                                <span class="text-danger" asp-for="ModeOfTraining"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Starting Date</label>
+                                <input asp-for="StartingDate" type="Date" class="form-control"/>
+                                <span asp-validation-for="StartingDate" class="text-danger"></span>
+                            </div>
+                            <div class="my-4 text-center">
+                                <button type="submit" class="btn btn-primary mr-1" style="width:150px">Add</button>
+                                <a asp-controller="Students" asp-action="StudentProgramIndex" class="btn btn-secondary" style="width:150px">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+

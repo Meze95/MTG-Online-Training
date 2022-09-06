@@ -1,0 +1,77 @@
+﻿@model MTG_OnlineTraining.ViewModel.EditProfileViewModel
+
+@{
+    ViewData["Title"] = "Edit Profile  Page";
+    Layout = "~/Views/Shared/StudentLayout/_Layout.cshtml";
+}
+
+<partial name="_notification" />
+
+
+    <div class="container m-4 p-5 bg-white">
+        <div class="row py-2 justify-content-center">
+                <div class="col-10 border my-5 formProgCreat">
+                     <div class="row justify-content-center p-5 bg-light formProgCreat">
+                        <div class="col-10 bg-light formProgCreat-IN AllForm">
+                            <div class="row btt-borda">
+                                    <div class="col-md-12 p-4">                            
+                                        <h2 class="text-center">Edit Profile</h2>
+                                    </div>
+                                </div>
+                            <form aasp-controller="Students" asp-action="EditProfile" enctype="multipart/form-data">
+                                <input type="email" class="form-control" asp-for="Email" hidden/>
+                                <div class="row">
+                                    <div class="col-md-7 pb-">
+                                        <label>First Name:</label>
+                                        <input type="text" class="form-control" asp-for="FirstName" placeholder="Enter First Name" />
+                                    </div>
+                                    <div class="col-md-5 pb-4">
+                                        <label>Last Name:</label>
+                                        <input type="text" class="form-control" asp-for="LastName" placeholder="Enter last Name">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 pb-4">
+                                        <label>Middle Name:</label>
+                                        <input type="text" class="form-control" asp-for="MiddleName" placeholder="Enter Middle Name">
+                                    </div>
+                                    <div class="col-md-7 pb-4">
+                                        <label>Date of Birth:</label>
+                                        <input type="date" class="form-control" asp-for="DOB" placeholder="Date of birth">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7 pb-4">
+                                         <label>Phone Number:</label>
+                                        <input type="number" class="form-control" asp-for="PhoneNumber" placeholder="Enter you phone number">
+                                    </div>
+                                    <div class="col-md-5 pb-4">
+                                        <label>State of Origin:</label>
+                                        <input type="text" class="form-control" asp-for="StateOfOrigin" placeholder="State of Residient">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 pb-4">
+                                         <label>Residient Address</label>
+                                         <input type="text" class="form-control" asp-for="Address" placeholder="Enter residient address">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6 pb-4">
+                                         <label>Passport:</label>
+                                         <input type="file" class="form-control" asp-for="ImageUrl">
+                                    </div>
+                                </div>
+                                <div class="row text-center justify-content-center">
+                                    <div class="col-md-12 pb-4">
+                                         <button type="submit" class="btn btn-success mr-1"  style="width:150px"><i class="fa fa-save"></i> Update</button>
+                                         <a asp-controller="Students" asp-action="Index"  class="btn btn-primary" style="width:150px"><i class="fa fa-arrow-circle-left"></i> Back</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+               </div>
+        </div>
+    </div>
+

@@ -1,0 +1,66 @@
+﻿@model MTG_OnlineTraining.ViewModel.UserViewModel
+@{
+    ViewData["Title"] = "Students  Page";
+    Layout = "~/Views/Shared/StudentLayout/_Layout.cshtml";
+}
+
+<partial name="_notification" />
+
+<div class="container-fluid p-5 bg-white">
+	<div class="text-center HDD">
+		<h1>Student Dashboard</h1>
+	</div>
+
+    <div class="row justify-content-center mt-3 py-3">
+        <div class="col-md-12">
+            <h2 class="text-dark"><b>Welcome <span style="color:#009783">@Model.ApplicationUser.FirstName</span></b></h2>
+        </div>
+    </div>            
+
+   <div class="card-deck">
+    <div class="card bg-light" style="color:#009783">
+      <div class="card-body text-center">
+        <i class="fa fa-user fa-5x" aria-hidden="true"></i>
+        <h3 class="card-text text-muted py-2">Student profile details</h3>
+        <button class="btn btn-primary"><a class="text-white" asp-controller="Students" asp-action="Profile"><b>View Profile</b></a></button>
+      </div>
+    </div>
+    <div class="card bg-light" style="color:#009783">
+      <div class="card-body text-center">
+        <i class="fa fa-address-card-o fa-5x" aria-hidden="true"></i>
+        <h3 class="card-text text-muted py-2">Change your profile details</h3>
+        <button class="btn btn-primary"><a class="text-white" asp-controller="Students" asp-action="EditProfile"><b>Edit Profile</b></a></button>
+         </div>
+    </div>
+  </div>
+
+
+<div class="ProfileWrap pt-4">
+    <div class="text-center p-2" style="border-radius:10px">
+        <div class="row px-3 pb-3">
+            <div class="col-md-12 text-center">
+                <h1 style="color:#009783">Available Programs</h1>
+            </div>
+            <p class="pt-4 text-justify" style="font-size:20px">You can register for any of the avialabel programs listed below and start your training. 
+                Note that the training materials for any program you choice will be made available for you in the <em><b><a asp-controller="Students" asp-action="StudentMaterial">training material tab.</a></b></em></p>
+             <h5  class="text-left">Click <a class="text-white btn btn-primary" asp-controller="Students" asp-action="StudentProgramCreate">Register Now</a> to complete your registration in just a few easy steps</h5>
+        </div>
+	</div>
+
+    <div class="row justify-content-center">
+           @foreach(var Program in Model.AdminProgramList)
+            {
+                <div class="col-md-4 p-4">
+                    <div class="card bg-light" style="border-radius:10px">
+                        <img class="card-img-top mx-auto" src="@Program.ProgramImg" alt="Card image cap" style="height:175px;width:90%;border-radius:10px">
+                      <div class="card-body text-center">
+                        <h4 class="card-text text-muted">@Program.ProgramName</h4>
+                        <h5 class="card-text text-muted py-1">Duration<small>(days)</small> : @Program.Duration</h5>
+                        <h6 class="card-text text-muted py-2"><a asp-controller="Students" asp-action="StudentProgramCreate">Register Now</a></h6>
+                      </div>
+                    </div>
+                </div>
+            }
+    </div>
+</div>
+</div>

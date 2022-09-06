@@ -1,0 +1,29 @@
+Downlod nudgets
+Create Model such as emplyee model inside model folder
+create a new folder called ViewModel
+Inside it create view model (EmployeeViewModel)
+
+Create database folder
+inside the database folder create a class (ApplicationDbContext)
+Create a constructor of the applicationDbContext(public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
+Ref your model inside the ApplicationDbContext ( public DbSet<Employee> EmployeeTB { get; set; })
+Goto appsetting.json and create a database connection ( "ConnectionStrings": {
+    "EmployeeTB": "Server=DESKTOP-19LMAJ2;Database=EmployeeDB;Trusted_Connection=True;MultipleActiveResultSets=True"
+  },)
+Replicate the connection in the appsettings.Development.json
+
+Goto Program.cs or startup and create a connection of your ApplicationDbContext and Tables to the database
+(builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("EmployeeTB")
+    ));)
+
+Run migration by going to tools, select >> Nuget packet manager >> package manager console >> run Add-migration addEmployee >> Update-Database
+Add a controller in the controllers folder (Alway end with Controller)
+Create a constructor of the database connection ( public EmployeeController(ApplicationDbContext context)
+        {
+            _context = context;
+        })
+Create method ( public IActionResult Createemployee() 
+        {
+            return View();
+        })

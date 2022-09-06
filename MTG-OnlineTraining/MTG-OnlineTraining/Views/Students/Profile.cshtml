@@ -1,0 +1,49 @@
+﻿@model MTG_OnlineTraining.Models.ApplicationUser
+@{
+    ViewData["Title"] = "Students  Page";
+   Layout = "~/Views/Shared/StudentLayout/_Layout.cshtml";
+}
+
+<partial name="_notification" />
+<div class="container-fluid p-5 bg-white">
+    <div class="row justify-content-center">
+        <div class="col-md-12 SBG">
+        </div>
+    </div>
+
+	<div class="row m-1 justify-content-center">
+		<div class="col-12">
+			<div class="card-avatar">
+				<center><img src="@Model?.Passport"> </center>
+			</div>
+			<div class="card-body text-center mt-4">
+				<h1>@Model?.LastName @Model?.FirstName  @Model?.MiddleName</h1>
+			</div>
+		</div>
+	</div>                
+</div>
+
+<div class="container-fluid p-5 PDetails">
+	<div class="row m-1 justify-content-center">
+		 <div class="col-md-6 pt-2"> 
+			<h3 class="text-center pt-2"><b>PERSONAL DETAILS</b></h3>
+			<hr>
+			<ul>
+			  <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Surname: <b>@Model?.LastName </b></li>
+			  <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>First Name: <b>@Model?.FirstName</b></li>
+			  <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Middle Name: <b>@Model?.MiddleName</b></li>
+			  <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Date of Birth: <b>@Model?.DOB.ToShortDateString()</b></li>
+			</ul>
+		</div>  
+		<div class="col-md-6 pt-2"> 
+			<h3 class="text-center pt-2"><b>CONTACT DETAILS</b></h3>
+			<hr>
+			<ul>
+				<li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>State of Origin: <b>@Model?.StateOfOrigin</b></li>
+				<li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Address: <b>@Model?.Address</b></li>
+				<li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Phone Number: <b>@Model?.PhoneNumber </b></li>
+				<li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Email: <b>@Model?.Email</b></li>
+			</ul>
+		</div> 
+	 </div>
+</div>

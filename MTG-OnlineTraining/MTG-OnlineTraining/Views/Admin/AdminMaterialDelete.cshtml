@@ -1,0 +1,51 @@
+﻿@model MTG_OnlineTraining.ViewModel.MaterialsViewModel
+
+@{
+    ViewData["Title"] = "Delete Material  Page";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<partial name="_notification" />
+
+    <div class=" p-3 mt-4 bg-white">
+        <div class="row py-2 justify-content-center">
+             <div class="col-10 border my-5 formProgCreat">
+                  <form  asp-action="AdminMaterialDelete" asp-controller="Admin" enctype="multipart/form-data">
+                       <div class="row justify-content-center p-5 bg-light formProgCreat">
+                             <div class="col-10 bg-light formProgCreat-IN">
+                                <div class="row">
+                                    <div class="col-md-12 p-4 btt-borda HDD"> 
+                                        <h1 class="text-center">Delete Material</h1>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Program Name</label>
+                                        <select class="form-control custom-select" disabled asp-items="@(new SelectList(@ViewBag.AllProgram,  "Id", "ProgramName" ))"></select>
+                                        <span class="text-danger"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Title</label>
+                                        <input asp-for="Title" disabled class="form-control"/>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Flow Order</label>
+                                        <input asp-for="FlowOrder" disabled class="form-control"/>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Upload File</label>
+                                        <input type="file" disabled class="form-control-file border" asp-for="File">
+                                    </div>
+                                    <div class="my-4 text-center">
+                                        <button type="submit" class="btn btn-primary mr-1" style="width:150px"><b>Delete</b></button>
+                                        <a asp-controller="Admin" asp-action="AdminMaterialIndex" class="btn btn-secondary" style="width:150px"><b>Back to List</b></a>
+                                    </div>
+                                </div>      
+                            </div>
+                       </div>
+                  </form>
+            </div>
+        </div>
+    </div>

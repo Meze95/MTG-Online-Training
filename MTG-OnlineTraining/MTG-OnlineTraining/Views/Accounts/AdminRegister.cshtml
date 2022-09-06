@@ -1,0 +1,72 @@
+﻿@model MTG_OnlineTraining.ViewModel.AdminRegistrationViewModel
+
+@{
+    ViewData["Title"] = "Admin Registration Page";
+}
+
+<partial name="_notification" />
+
+ <div class="container mt-3">
+        <div class="row py-2 justify-content-center">
+             <div class="col-10 border my-5 formProgCreat">
+                 <div class="row justify-content-center p-5 bg-light formProgCreat">
+                    <div class="col-10 bg-light formProgCreat-IN AllForm">
+                        <div class="row">
+                                <div class="col-md-12 p-4 btt-borda HDD">                            
+                                    <h1 class="text-center">Registration Form</h1>
+                                </div>
+                            </div>
+                        <form asp-controller="Accounts" asp-action="AdminRegister" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-denger"></div>
+                            <div class="row">
+                                <div class="col-md-6 pb-">
+                                    <label>First Name:</label>
+                                    <input type="text" class="form-control" asp-for="FirstName" placeholder="Enter First Name" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 pb-4">
+                                    <label>Last Name:</label>
+                                    <input type="text" class="form-control" asp-for="LastName" placeholder="Enter last Name">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 pb-4">
+                                        <label>Phone Number:</label>
+                                    <input type="number" class="form-control" asp-for="PhoneNumber" placeholder="Enter you phone number">
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 pb-4">
+                                    <label>Email:</label>
+                                    <input type="email" class="form-control" asp-for="Email" placeholder="Enter email">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 pb-4">
+                                        <label>Password:</label>
+                                        <input type="password" class="form-control" asp-for="Password" placeholder="Enter password">
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 pb-4">
+                                    <label>Confirm Password:</label>
+                                    <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Confirm password">
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row text-center justify-content-center">
+                                <div class="col-md-12 pb-5">
+                                        <button type="submit" class="btn btn-success" style="width:80%">Register</button>
+                                </div>
+                            </div>
+                            <div class="row text-center justify-content-center pb-5">
+                                <div class="col-md-12 text-center">
+                                    <h5 class="text-center"> I don't have an account?  <a asp-controller="Accounts" asp-action="Login">  Login</a></h5>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+      </div>
+</div>

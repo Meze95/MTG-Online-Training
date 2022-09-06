@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MTG_OnlineTraining</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/dist/css/style.min.css"/>
+    <link rel="stylesheet" type="text/css" href="~/assets/extra-libs/prism/prism.css"/>
+    <link rel="stylesheet" href="~/Training/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/toastr.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css"/>
+
+     <script src="~/Training/js/jquery-3.6.0.min.js"></script>
+    <script src="~/Training/js/jquery.slim.min.js"></script>
+    <script src="~/Training/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Training/js/bootstrap.js"></script>
+    <script src="~/Training/js/bootstrap.min.js"></script>
+    <script src="~/Training/js/popper.min.js"></script>
+    <script src="~/Training/js/sweetalert.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</head>
+<body>
+    <!-- -------------------------------------------------------------- -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- -------------------------------------------------------------- -->
+    <div id="main-wrapper">
+      <!-- -------------------------------------------------------------- -->
+      <!-- Topbar header - style you can find in pages.scss -->
+      <!-- -------------------------------------------------------------- -->
+      <header class="topbar">
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+          <div class="navbar-header">
+            <!-- This is for the sidebar toggle which is visible on mobile only -->
+            <a class="nav-toggler waves-effect waves-light d-block d-md-none"
+              href="#"><i class="fa fa-bars" aria-hidden="true"></i>
+            </a>
+            <!-- ============================================================== -->
+            <!-- Logo -->
+            <!-- ============================================================== -->
+            <a class="navbar-brand" href="#">
+              <!-- Logo icon -->
+              <b class="logo-icon">
+                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-
+                <!-- Light Logo icon -->
+                <img src="~/images/logo-light-icon.png" alt="homepage" class="light-logo"/>
+              </b>
+              <!--End Logo icon -->
+              <!-- Logo text -->
+              <span class="logo-text">
+                <!-- Light Logo text -->
+                <img src="~/images/logo-light-text.png" class="light-logo" alt="homepage"/>
+              </span>
+            </a>
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Toggle which is visible on mobile only -->
+            <!-- ============================================================== -->
+            <a class="topbartoggler d-block d-md-none waves-effect waves-light"
+              href="#" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            </a>
+          </div>
+          <!-- ============================================================== -->
+          <!-- End Logo -->
+          <!-- ============================================================== -->
+          <div class="navbar-collapse collapse" id="navbarSupportedContent">
+            <!-- ============================================================== -->
+            <!-- toggle and nav items -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav me-auto">
+              <!-- This is  -->
+              <li class="nav-item">
+                <a class=" nav-link sidebartoggler d-none d-md-block waves-effect waves-dark"
+                  href="#"> <i class="fa fa-bars" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+            <!-- ============================================================== -->
+            <!-- Right side toggle and nav items -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav">
+              <!-- ============================================================== -->
+              <!-- Search Bar Started -->
+              <!-- ============================================================== -->
+              <li class="nav-item d-none d-md-block search-box">
+                <a class="nav-link d-none d-md-block waves-effect waves-dark" href="#">
+                  <i class="fa fa-search" aria-hidden="true"></i> Search
+                </a>
+                <form class="app-search">
+                  <input type="text" class="form-control" placeholder="Search & enter"/>
+                  <a class="srh-btn"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </form>
+              </li>
+              <!-- ============================================================== -->
+              <!-- Search Bar Started -->
+              <!-- ============================================================== -->
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- -------------------------------------------------------------- -->
+      <!-- End Topbar header -->
+      <!-- -------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------- -->
+      <!-- Left Sidebar - style you can find in sidebar.scss  MartSiderBar-->
+      <!-- -------------------------------------------------------------- -->
+      <aside class="left-sidebar " style="background-color: #009783;">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+          <!-- User profile -->
+          <div
+            class="user-profile position-relative h-4">
+            <!-- User profile image -->
+            
+            <!-- User profile text-->
+            <div class="profile-text pt-1"></div>
+          </div>
+          <!-- End User profile text-->
+          <!-- Sidebar navigation--MTG SiderBar -->
+          <nav class="sidebar-nav">
+            <ul id="sidebarnav" style="background-color: #009783;">
+              <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-light sidebar-link" asp-controller="Students" asp-action="Index" aria-expanded="false">
+                  <i class="fa fa-tachometer" aria-hidden="true">
+                  </i> <span class="hide-menu text-white">Dashboard</span>
+                 </a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-light sidebar-link" asp-controller="Students" asp-action="StudentProgramIndex" aria-expanded="false">
+                  <i class="fa fa-tasks" aria-hidden="true"></i>
+                  <span class="hide-menu">Programs</span>
+              </a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-light sidebar-link" asp-controller="Students" asp-action="StudentMaterial"  aria-expanded="false">
+                  <i class="fa fa-files-o" aria-hidden="true"></i>
+                  <span class="hide-menu">Training Materials</span>
+              </a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-light sidebar-link" aria-expanded="false">
+                    <i class="fa fa-hourglass-2" aria-hidden="true"></i>
+                    <span class="hide-menu">Blank</span>
+                 </a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-light sidebar-link" aria-expanded="false">
+                    <i class="fa fa-hourglass-2" aria-hidden="true"></i>
+                    <span class="hide-menu">Blank</span>
+                 </a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-light sidebar-link" aria-expanded="false">
+                    <i class="fa fa-hourglass-2" aria-hidden="true"></i>
+                    <span class="hide-menu">Blank</span>
+                 </a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-light sidebar-link" aria-expanded="false">
+                    <i class="fa fa-hourglass-2" aria-hidden="true"></i>
+                    <span class="hide-menu">Blank</span>
+                 </a>
+              </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-light sidebar-link" asp-controller="Accounts" asp-action="LogOut"  aria-expanded="false">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i> 
+                                <span class="hide-menu">Log Out</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-light sidebar-link" aria-expanded="false">
+                                <i class="fa fa-hourglass-2" aria-hidden="true"></i>
+                                <span class="hide-menu">Blank</span>
+                            </a>
+                        </li>   
+                    }
+             </ul>
+          </nav>
+          <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+      </aside>
+      <!-- -------------------------------------------------------------- -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- -------------------------------------------------------------- -->
+      <!-- -------------------------------------------------------------- -->
+      <!-- Page wrapper  -->
+      <!-- -------------------------------------------------------------- -->
+      <div class="page-wrapper bg-white">
+       
+        <main role="main">
+            @RenderBody()
+        </main>
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+
+        <!-- footer -->
+        <!-- -------------------------------------------------------------- -->
+        <footer class="footer text-center bg-light">
+          All Rights Reserved by MTG.
+        </footer>
+        <!-- -------------------------------------------------------------- -->
+        <!-- End footer -->
+        <!-- -------------------------------------------------------------- -->
+      </div>
+      <!-- -------------------------------------------------------------- -->
+      <!-- End Page wrapper  -->
+      <!-- -------------------------------------------------------------- -->
+    </div>
+    <!-- --------------
+
+
+
+
+    <!-- -------------------------------------------------------------- -->
+    <!-- All Jquery -->
+    <!-- -------------------------------------------------------------- -->
+
+    <script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- apps -->
+    <script src="~/dist/js/app.min.js"></script>
+    <script src="~/dist/js/app.init.dark.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/dist/js/feather.min.js"></script>
+    <script src="~/dist/js/custom.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <!-- This Page JS -->
+    <script src="~/assets/extra-libs/prism/prism.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

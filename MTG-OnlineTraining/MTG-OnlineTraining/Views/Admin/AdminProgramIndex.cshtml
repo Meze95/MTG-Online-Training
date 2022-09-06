@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MTG_OnlineTraining.Models.AdminProgram>
+@{
+    ViewData["Title"] = "Admin Program View";
+        Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<partial name="_notification" />
+<style>
+
+    body {
+        counter-reset: Serial; /* / Set the Serial counter to 0 /*/
+    }
+
+    tr td:first-child:before  {
+        counter-increment: Serial; /* / Increment the Serial counter /*/
+        content: counter(Serial); /*  / Display the counter /*/
+    }
+</style>
+<div class="mx-5 bg-white">
+    <div class="container p-3 table-responsive">
+        <div class="row pt-4">
+            <div class="col-6 HDD">
+                <h1>Program list</h1>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Admin" asp-action="AdminProgramCreate" class="btn btn-primary"><b>Add New Program</b></a>
+            </div>
+            <br />  <br />  
+         </div>
+
+        @if(Model.Count() > 0)
+        {
+          <table class="table table-bordered table-hover table-info table-sm text-dark" style="width:100%; background-color: gray">
+            <thead class="thead-light bg-info text-white">
+                  <tr>
+                      <th>S/N</th>
+                      <th>Program Name</th>
+                      <th>Program Description</th>
+                      <th>Duration(Days)</th>
+                      <th>Date Created</th> 
+                      <th class="text-center">Action</th>
+                  </tr>
+              </thead>
+              <tbody class="bg-white">
+                  @foreach (var program in Model)
+                  {
+                      <tr>
+                          <td width="10%"></td>
+                          <td width="20%">@program.ProgramName</td>
+                          <td width="30%">@program.ProgramDescription</td>
+                          <td width="10%">@program.Duration</td>
+                          <td width="10%">@program.CreatedDate.ToShortDateString()</td>
+                          <td width="20%" class="text-center">
+                              <a asp-controller="Admin" asp-action="AdminProgramEdit" asp-route-Id="@program.Id" class="btn btn-primary mr-1">Edit</a>
+                              <a asp-controller="Admin" asp-action="AdminProgramDelete" asp-route-Id="@program.Id" class="btn btn-danger">Delete</a>
+                          </td> 
+                     </tr> 
+                  }
+              </tbody>
+          </table>
+        }
+        else
+        {
+            <div cclass="row p5">
+                <div class="col-md-12 text-center p-5 m5">
+                    <h2>No Record Found</h2>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

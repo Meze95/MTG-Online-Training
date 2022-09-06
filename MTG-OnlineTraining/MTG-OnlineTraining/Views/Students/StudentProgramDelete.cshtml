@@ -1,0 +1,40 @@
+﻿@model MTG_OnlineTraining.ViewModel.StudentProgramsViewModel
+
+@{
+    ViewData["Title"] = "Delete Program  Page";
+    Layout = "~/Views/Shared/StudentLayout/_Layout.cshtml";
+}
+
+<partial name="_notification" />
+    <div class=" p-3 mt-4 bg-white">
+        <form  asp-action="" asp-controller="">
+        <div class="row py-5 justify-content-center">
+            <div class="col-6 border my-5">
+                <div class="my-4">
+                   <h2 class="text-primary">Delete Program</h2>
+                   <hr />
+                </div>
+
+                <div class="mb-3">
+                    <label>Program Name</label>
+                    <input asp-for="AdminProgramId" type="text" disabled class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label>Mode Of Training</label>
+                    <input asp-for="ModeOfTraining" disabled class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label>Starting Date</label>
+                    <input asp-for="StartingDate" type="Date" disabled class="form-control"/>
+                </div>
+                <div class="my-4 text-center">
+                    <button type="submit" class="btn btn-primary mr-1" style="width:150px">Delete</button>
+                    <a asp-controller="Students" asp-action="StudentPtrogramIndex" class="btn btn-secondary" style="width:150px">Back to List</a>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+

@@ -1,0 +1,62 @@
+﻿@model MTG_OnlineTraining.ViewModel.AdminProgramViewModel
+
+@{
+    ViewData["Title"] = "Edit Program  Page";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<partial name="_notification" />
+ <div class="container mt-3">
+        <div class="row py-2 justify-content-center">
+             <div class="col-10 border my-5 formProgCreat">
+                 <div class="row justify-content-center p-5 bg-light formProgCreat">
+                    <div class="col-10 bg-light formProgCreat-IN AllForm">
+                        <div class="row">
+                                <div class="col-md-12 p-4 btt-borda HDD">                            
+                                    <h1 class="text-center">Edit Program</h1>
+                                </div>
+                            </div>
+                        <form asp-controller="Admin" asp-action="AdminProgramEdit" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-denger"></div>
+                            
+                            <div class="row">
+                                <div class="col-md-12 pb-4">
+                                    <label>Program Name</label>
+                                    <input asp-for="ProgramName" type="text" class="form-control"/>
+                                    <span asp-validation-for="ProgramName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 pb-4">
+                                        <label>Program Dscription</label>
+                                        <input asp-for="ProgramDescription" type="text" class="form-control"/>
+                                        <span asp-validation-for="ProgramDescription" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 pb-4">
+                                    <label>Duration</label>
+                                    <input asp-for="Duration" type="number" class="form-control"/>
+                                    <span asp-validation-for="Duration" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 pb-5">
+                                        <label>Upload Program Image:</label>
+                                        <input asp-for="ProgramImageUrl" type="file"  class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="row text-center justify-content-center pb-5">
+                                <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary mr-1" style="width:150px"><b>Update</b></button>
+                                <a asp-controller="Admin" asp-action="AdminProgramIndex" class="btn btn-secondary" style="width:150px"><b>Back to List</b></a>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+      </div>
+</div>
+
+

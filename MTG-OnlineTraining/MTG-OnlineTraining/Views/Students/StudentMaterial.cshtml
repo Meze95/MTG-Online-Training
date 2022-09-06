@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MTG_OnlineTraining.Models.Materials>
+@{
+    ViewData["Title"] = "Students  Page";
+    Layout = "~/Views/Shared/StudentLayout/_Layout.cshtml";
+}
+
+<partial name="_notification" />
+
+<div class="container-fluid p-5 bg-white">
+	<div class="text-center HDD">
+		<h1>Handouts</h1>
+	</div>
+    
+    <div class="ProfileWrap pt-4">
+        @if (Model.Count() > 0)
+            {
+        <div class="text-center py-4">
+            <div class="row">
+                <div class="col-md-12 text-justify">
+                    <h5 style="line-height:1.6em">Below are the list of all the available training materialss for the programs you registered that have been approved. 
+                        Note that the training materialss can come in different file formats Eg: PDF, Word, Video, Audio and many others.
+                        Also, the materails for the different program registered will be listered here with there respective order number on how it should be followed
+                </h5></div>
+            </div>
+	    </div>
+
+        <div class="row justify-content-center">
+                @foreach(var materials in Model)
+                {
+                    <div class="col-md-4 py-2">
+                        <div class="card bg-light">
+                                @if(@materials.File.Contains("xlsx")){
+                                    <center><i class="fa fa-file-excel-o" style="font-size:100px;color:green"></i></center>
+                                }else if(@materials.File.Contains("xls")){
+                                    <center><i class="fa fa-file-excel-o" style="font-size:100px;color:green"></i></center>
+                                }else if(@materials.File.Contains("DOC")){
+                                    <center><i class="fa fa-file-word-o" style="font-size:100px;color:blue"></i></center>
+                                }else if(@materials.File.Contains("docx")){
+                                    <center><i class="fa fa-file-word-o" style="font-size:100px;color:blue"></i></center>
+                                }else if(@materials.File.Contains("pptx")){
+                                    <center><i class="fa fa-file-powerpoint-o" style="font-size:100px;color:red"></i></center>
+                                }else if(@materials.File.Contains("PPT")){
+                                    <center width="10%"class="text-center"><i class="fa fa-file-powerpoint-o" style="font-size:100px;color:red"></i></center>
+                                }else if(@materials.File.Contains("pdf")){
+                                    <center><i class="fa fa-file-pdf-o" style="font-size:100px;width:auto;color:red"></i></center>
+                                }else if(@materials.File.Contains("mp3")){
+                                    <center><i class="fa fa-file-audio-o" style="font-size:100px"></i></center>
+                                }else if(@materials.File.Contains("mp4")){
+                                    <center><i class="fa fa-file-video-o" style="font-size:100px;color:blue"></i></center>
+                                }else if(@materials.File.Contains("txt")){
+                                    <center><i class="fa fa-file-text-o" style="font-size:100px"></i></center>
+                                }else if(@materials.File.Contains("png")){
+                                    <center><i class="fa fa-file-picture-o" style="font-size:100px"></i></center>
+                                }else if(@materials.File.Contains("jpg")){
+                                    <center><i class="fa fa-file-picture-o" style="font-size:100px"></i></center>
+                                }else if(@materials.File.Contains("jpeg")){
+                                    <center><i class="fa fa-file-picture-o" style="font-size:100px"></i></center>
+                                }else {
+                                    <center><i class="fa fa-file-o" style="font-size:100px"></i></center>
+                                } 
+                            <div class="card-body text-center">
+                            <h3 class="card-text text-muted py-1">@materials.AdminProgram.ProgramName</h3>
+                            <h4 class="card-text text-muted py-1">@materials.Title</h4>
+                            <h4 class="card-text text-muted py-1">@materials.FlowOrder</h4>
+                            <h5 class="card-text text-muted py-1"><a href="@materials.File" target="_blank">View materials</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+        </div>
+        }
+        else
+        {
+            <div class="row justify-content-center">
+                <div cclass="row p5 m-5">
+                    <div class="col-md-12 text-center p-5 m5">
+                        <h2>No Record Found</h2>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

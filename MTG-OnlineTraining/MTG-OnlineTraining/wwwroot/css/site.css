@@ -1,0 +1,111 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.BodyRender{
+    height: 100%;
+    min-height: 200px;
+}
+
+.SBG {
+    background-image: url(../images/SBG.jpg);
+    background-repeat: repeat;
+    min-height: 152px;
+    border-radius: 25px;
+    border: 5px solid #009783;
+}
+
+.SPP {
+    height: 200px;
+    border-radius: 100%;
+    border: 3px green solid;
+    margin-top: -60px;
+    position: absolute;
+}
+
+.card-avatar {
+    width: 200px;
+    max-width: 200px;
+    max-height: 200px;
+    margin: -50px auto 0;
+    border-radius: 50%;
+    border: 5px solid #009783;
+    overflow: hidden;
+    padding: 0;
+    box-shadow: 0 16px 38px -12px rgba(0,0,0,.56), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+}
+
+    .card-avatar img {
+        width: 100%;
+    }
+
+    .PDetails .row {
+        box-sizing:border-box;
+    }
+    .PDetails li {
+
+        line-height: 2.5em;
+        font-size: x-large;
+    }
+    .PDetails li span {
+        font-size: large;
+    }
+
+    .PDetails ul {
+        list-style-type: none;
+    }
+
+.PDetails .col-md-6 {
+    border: 2px solid gray;
+    border-right: none;
+    border-radius: 40px;
+    box-sizing: border-box;
+    border-left: none;
+}
+
+.ProfileWrap .row .col-md-4 .card {
+    background-color: azure;
+    padding-top: 7px;
+}
+
+.AllForm{
+    border-radius: 30px;
+    border: 5px solid gray;
+}
+.btt-borda{
+    border-bottom: 5px solid gray;
+    margin-bottom:15px;
+}
+
+.Mat-Card {
+    background-color: lavender;
+}
+
+.formProgCreat {
+    border:10px solid light;
+    border-radius: 50px;
+    box-shadow: 0 16px 38px -12px rgba(0,0,0,.56), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+}
+
+.formProgCreat-IN {
+    border: 10px solid gray;
+    border-radius: 20px;
+}
+.HDD h1 {
+    color: #009783;
+}

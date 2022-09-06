@@ -1,0 +1,52 @@
+﻿@model MTG_OnlineTraining.ViewModel.AdminProgramViewModel
+
+@{
+    ViewData["Title"] = "Add Program Page";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<partial name="_notification" />
+
+    <div class=" p-3 mt-4 bg-white">
+        <form  asp-action="AdminProgramCreate" asp-controller="Admin" enctype="multipart/form-data">
+            <div class="row py-2 justify-content-center">
+                <div class="col-10 border my-5 formProgCreat">
+                     <div class="row justify-content-center p-5 bg-light formProgCreat">
+                        <div class="col-10 bg-light formProgCreat-IN">
+                            <div asp-validation-summary="ModelOnly" class="text-denger"></div>
+                            <div class="my-4 HDD">
+                               <h1 class="text-center">Add Program</h1>
+                               <hr />
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Program Name</label>
+                                <input asp-for="ProgramName" type="text" class="form-control"/>
+                                <span asp-validation-for="ProgramName"  class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label>Program Description</label>
+                                <input asp-for="ProgramDescription" type="text" class="form-control"/>
+                                <span asp-validation-for="ProgramDescription"  class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Duration</label>
+                                <input asp-for="Duration" type="number" class="form-control"/>
+                                <span asp-validation-for="Duration" class="text-danger"></span>
+                            </div>
+                
+                            <div class="mb-3">
+                              <label>Upload Your Image:</label>
+                              <input type="file" asp-for="ProgramImageUrl">
+                            </div>
+                            <div class="my-4 text-center">
+                                <button type="submit" class="btn btn-primary mr-1" style="width:150px"><b>Add</b></button>
+                                <a asp-controller="Admin" asp-action="AdminProgramIndex" class="btn btn-secondary" style="width:150px"><b>Back to List</b></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </form>
+    </div>

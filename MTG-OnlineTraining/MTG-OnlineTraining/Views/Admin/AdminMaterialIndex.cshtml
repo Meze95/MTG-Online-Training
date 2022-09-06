@@ -1,0 +1,99 @@
+﻿@model IEnumerable<MTG_OnlineTraining.Models.Materials>
+@{
+    ViewData["Title"] = "Admin Material View";
+        Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<partial name="_notification" />
+<style>
+
+    body {
+        counter-reset: Serial; /* / Set the Serial counter to 0 /*/
+    }
+
+    tr td:first-child:before  {
+        counter-increment: Serial; /* / Increment the Serial counter /*/
+        content: counter(Serial); /*  / Display the counter /*/
+    }
+</style>
+<div class="mx-5 bg-white">
+    <div class="container p-3 table-responsive">
+        <div class="row pt-4">
+            <div class="col-6 HDD">
+                <h1>Material list</h1>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Admin" asp-action="AdminMaterialCreate" class="btn btn-primary"><b>Add New Material</b></a>
+            </div>
+            <br /> <br />  
+        </div>
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-hover table-info table-sm text-dark" style="width:100%; background-color: gray">
+               <thead class="thead-light bg-info text-white">
+                  <tr>
+                      <th>S/N</th>
+                      <th>Program</th>
+                      <th>Title </th>
+                      <th class="text-center">File</th>  
+                      <th>Flow Order</th>  
+                      <th class="text-center">Action</th>
+                  </tr>
+              </thead>
+              <tbody class="bg-white">
+                  @foreach (var material in Model)
+                  {
+                     <tr>
+                          <td width="10%"></td>
+                          <td width="25%">@material.AdminProgram?.ProgramName</td>
+                          <td width="25%">@material.Title</td>
+                          @if(@material.File.Contains("xlsx")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-excel-o" style="font-size:50px;color:green"></i></td>
+                          }else if(@material.File.Contains("xls")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-excel-o" style="font-size:50px;color:green"></i></td>
+                          }else if(@material.File.Contains("DOC")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-word-o" style="font-size:50px;color:blue"></i></td>
+                          }else if(@material.File.Contains("docx")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-word-o" style="font-size:50px;color:blue"></i></td>
+                          }else if(@material.File.Contains("pptx")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-powerpoint-o" style="font-size:50px;color:red"></i></td>
+                          }else if(@material.File.Contains("PPT")){
+                              <td width="10%"class="text-center"><i class="fa fa-file-powerpoint-o" style="font-size:50px;color:red"></i></td>
+                          }else if(@material.File.Contains("pdf")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-pdf-o" style="font-size:50px;width:auto;color:red"></i></td>
+                          }else if(@material.File.Contains("mp3")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-audio-o" style="font-size:50px"></i></td>
+                          }else if(@material.File.Contains("mp4")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-video-o" style="font-size:50px;color:blue"></i></td>
+                          }else if(@material.File.Contains("txt")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-text-o" style="font-size:50px"></i></td>
+                          }else if(@material.File.Contains("png")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-picture-o" style="font-size:50px"></i></td>
+                          }else if(@material.File.Contains("jpg")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-picture-o" style="font-size:50px"></i></td>
+                          }else if(@material.File.Contains("jpeg")){
+                              <td width="10%" class="text-center"><i class="fa fa-file-picture-o" style="font-size:50px"></i></td>
+                          }else {
+                              <td width="10%" class="text-center"><i class="fa fa-file-o" style="font-size:50px"></i></td>
+                          }      
+                          <td width="10%" class="text-center">@material.FlowOrder</td>
+                          <td width="20%" class="text-center">
+                              <a asp-controller="Admin" asp-action="AdminMaterialEdit" class="mr-1"><i class="fa fa-edit fa-2x" aria-hidden="true" style="color:#009783"></i></a>
+                              <a asp-controller="Admin" asp-action="AdminMaterialDelete" class="ml-1"><i class="fa fa-trash-o fa-2x" aria-hidden="true" style="color:red"></i></a>
+                          </td> 
+                     </tr> 
+                 }
+              </tbody>
+            </table>
+        }
+        else
+        {
+            <div cclass="row p5">
+                <div class="col-md-12 text-center p-5 m5">
+                    <h2>No Record Found</h2>
+                </div>
+            </div>
+        }
+    </div>
+
+

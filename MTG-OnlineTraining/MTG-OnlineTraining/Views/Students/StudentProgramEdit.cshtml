@@ -1,0 +1,45 @@
+﻿@model MTG_OnlineTraining.ViewModel.StudentProgramsViewModel
+
+@{
+    ViewData["Title"] = "Edit Program  Page";
+    Layout = "~/Views/Shared/StudentLayout/_Layout.cshtml";
+}
+
+<partial name="_notification" />
+
+
+    <div class=" p-3 mt-4 bg-white">
+        <form  asp-action="" asp-controller="">
+        <div class="row py-5 justify-content-center">
+            <div class="col-8 border my-5">
+                <div class="my-4">
+                   <h2 class="text-primary">Edit Program</h2>
+                   <hr />
+                </div>
+
+                <div class="mb-3">
+                    <label>Program Name</label>
+                    <input asp-for="AdminProgramId" type="text" class="form-control"/>
+                    <span asp-validation-for="AdminProgramId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label>Mode Of Training</label>
+                    <input asp-for="ModeOfTraining" class="form-control"/>
+                    <span asp-validation-for="ModeOfTraining" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label>Starting Date</label>
+                    <input asp-for="StartingDate" type="Date" class="form-control"/>
+                    <span asp-validation-for="StartingDate" class="text-danger"></span>
+                </div>
+                <div class="my-4 text-center">
+                    <button type="submit" class="btn btn-primary mr-1" style="width:150px">Update</button>
+                    <a asp-controller="Students" asp-action="StudentProgramIndex" class="btn btn-secondary" style="width:150px">Back to List</a>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boostrap | training</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap-utilities.min.css">
+  <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="css/bootstrap-grid.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+  <script src="js/popper.min.js"></script>
+  <script src="js/jquery.slim.min.js"></script>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/jquery.min.js" ></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/bootstrap.bundle.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+      
+</head>
+<body>
+    <!-- General Header area starts -->
+  <div class="Cname">
+    <div class="contacts-left"> 
+      <h1>M-Tech <span>Global</span> Institute</h1> 
+    </div>
+    <div class="contacts"> 
+        <ul>
+            <li><p><i class="fa fa-envelope-o" aria-hidden="true"></i>  mtechglobalnig@gmail.com</p></li>
+            <li><p><i class="fa fa-phone" aria-hidden="true"></i>  +234 814-960-7825</p></li>
+        </ul> 
+    </div>
+  </div>
+  <div class="clear-fix"></div>
+
+<!-- General Header Starts here -->
+<nav class="navbar navbar-expand-md navbar-light sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"> <img style="width: 80px; height: 80px; padding: 0; border-radius: 15px;" src="images/logo.png"> </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 LinkCol ">
+          <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">About</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">Services</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Accounting Training</a>
+              <a class="dropdown-item" href="#">Software Dev Training</a>
+              <a class="dropdown-item" href="#">Networking Training</a>
+            </div>
+          </li>
+          <li class="nav-item"><a class="nav-link text-white" href="Registration.html">Registration</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="contact.html">Contact Us</a></li>
+        </ul>
+
+          <!-- Search bar -->
+        <form class="d-flex" role="search">
+          <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+      </div>
+    </div>
+</nav>
+<!-- General Header Ends here -->
+
+<div class="cent-row">
+  <h2>Registration Form</h2>
+</div>
+
+<div class="container fom">
+  <form action="/action_page.php">
+    <div class=row>
+       <div class="form-group col-md-6">
+          <label for="text">First Name:</label>
+          <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
+        </div>
+      <div class="form-group col-md-6">
+          <label for="text">Last Name:</label>
+          <input type="text" class="form-control" id="lname" placeholder="Enter last Name" name="lname">
+      </div>
+    </div>
+
+    <div class=row>
+      <div class="form-group col-md-6">
+          <label for="text">Middle Name:</label>
+          <input type="text" class="form-control" id="mname" placeholder="Enter Middle Name" name="mname">
+      </div>
+        <div class="form-group col-md-6">
+          <label for="date">Date of Birth:</label>
+          <input type="date" class="form-control" id="DOB" placeholder="Date of birth" name="DOB">
+        </div>
+    </div>
+
+        <div class=row>
+      <div class="form-group col-md-6">
+          <label for="text">State of Origin:</label>
+          <input type="text" class="form-control" id="soo" placeholder="State of Origin" name="soo">
+      </div>
+        <div class="form-group col-md-6">
+          <label for="text">State of Residient:</label>
+          <input type="text" class="form-control" id="sor" placeholder="State of Residient" name="sor">
+    </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="Address">Residient Address</label>
+      <input type="text" class="form-control" id="address" placeholder="Enter residient address" name="address">
+    </div>
+
+    <div class="form-group ">
+          <label for="text">Choose Program:</label>
+            <select class="form-control custom-select" id="prog" name="prog">
+              <option>Software Development Training</option>
+              <option>Computrized Accounting Training</option>
+              <option>Networking and Maintanance Training</option>
+            </select>
+    </div>
+
+    <div class="form-group ">
+          <label for="text">Preferred Mode of Training:</label>
+            <select class="form-control custom-select" id="prog" name="prog">
+              <option>Online</option>
+              <option>Office</option>
+            </select>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Upload Your Passport:</label>
+      <input type="file" class="form-control-file border" name="file">
+    </div>
+
+    <br>
+    <div class="form-group input-group">
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      <div class="input-group-append">
+        <span class="input-group-text">@example.com</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
+
+<br>
+<!-- Footer area -->
+
+<div class="footer-top">
+  <div class="row justify-content-center text-white">
+    <div class="col-md-3"> 
+        <h3>Software Development</h3>
+        <hr>
+              <ul>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>HTML</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>CSS</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>BOSSTRAP</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>JavaScript</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>JQuery</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>C#</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>ASP.NET</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>SQL Server</li>
+              </ul>
+    </div>  
+    <div class="col-md-3"> 
+        <h3>Computerized Accounting</h3>
+        <hr>
+              <ul>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Introduction</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Customer</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Supplier</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Products</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Nornimal Ledger</li>
+                <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Reporting</li>
+              </ul>
+    </div>  
+    <div class="col-md-3"> 
+        <h3>System Networking</h3>
+        <hr>
+        <ul>
+          <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Induction</li>
+          <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Peer-to-Peer Networking</li>
+          <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Client-Server Networking</li>
+          <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Network Security Control</li>
+          <li><i class="fa fa-check-circle" style="color:#004150;padding-right:15px"></i>Disk & Data Recovery</li>
+        </ul>
+    </div>  
+  </div>
+
+  <div class="social"> 
+      <hr>
+      <ul>
+        <li><a href="#"><i class="fa fa-twitter fa-3x" style="color:white;padding-right:20px"></i></a></li>
+            <li><a href="#"><i class="fa fa-facebook fa-3x" style="color:white;padding-right:20px"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram fa-3x" style="color:white;padding-right:20px"></i></a></li>
+        </ul>
+  </div>
+</div>
+
+
+<div class="container-fluid bg-dark"> 
+  <footer id="main-footer">
+    <p>Copyright &copy; 2022 All Rights Reserved</p>
+    <p>Designed by | MTech Global</p>
+  </footer>
+</div>
+</body>
+</html>

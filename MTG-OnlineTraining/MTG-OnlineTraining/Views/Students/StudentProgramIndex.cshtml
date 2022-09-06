@@ -1,0 +1,134 @@
+﻿@model IEnumerable<MTG_OnlineTraining.Models.StudentPrograms>
+@{
+    ViewData["Title"] = "Registered Program Page";
+    Layout = "~/Views/Shared/StudentLayout/_Layout.cshtml";
+}
+
+<partial name="_notification" />
+<style>
+
+    body {
+        counter-reset: Serial; /* / Set the Serial counter to 0 /*/
+    }
+
+    tr td:first-child:before  {
+        counter-increment: Serial; /* / Increment the Serial counter /*/
+        content: counter(Serial); /*  / Display the counter /*/
+    }
+</style>
+<div class="mx-5 bg-white">
+    <div class="container p-3 table-responsive">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h1 style="color:#009783">My Programs</h1>
+            </div>
+            <div class="col-6 text-end">
+                <button type="button" class="btn btn-primary" id="add-notes" data-toggle="modal" data-target="#myModal">Register New Program</button>
+            </div>
+            <br /><br />  
+        </div>
+
+        @if(Model.Count() > 0)
+        {
+        <table class="table table-bordered table-hover table-info table-sm text-dark" style="width:100%; background-color: gray">
+            <thead class="thead-light bg-info text-white">
+                <tr>
+                    <th>S/N</th>
+                    <th>Name</th>
+                    <th>Duration(days)</th>
+                    <th>Starting Date</th>
+                    <th>Starting Date</th>
+                    <th>Status</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                @foreach (var program in Model)
+                {
+                    <tr class="text-dark">
+                        <td width="5%"></td>
+                        <td width="25%">@program.AdminProgram?.ProgramName</td>
+                        <td width="14%">@program.AdminProgram?.Duration</td>
+                        <td width="13%">@program.StartingDate.Date.ToShortDateString()</td>
+                        <td width="13%">@program.EndingDate.Date.ToShortDateString()</td>
+                        @if(@program.IsActive == true)
+                        {
+                            <td width="15%" class="text-success"><b>Aproved</b></td>
+                        }
+                        else
+                        {
+                            <td width="15%" class="text-denger"><b>Awaiting Aprover</b></td>
+                        }
+
+                        <td width="15%"  class="text-center">
+                            <button type="button" class="btn btn-primary mr-2" >Edit</button>
+                            <button type="button" class="btn btn-secondary">Delete</button>
+                        </td> 
+                    </tr> 
+                }
+            </tbody>
+            </table>
+        }
+        else
+        {
+            <div cclass="row p5">
+                <div class="col-md-12 text-center p-5 m5">
+                    <h2>No Record Found</h2>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Modal Add notes -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="addnotesmodalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-header bg-info text-white text-center">
+                <h5 class="modal-title text-white ">Add Program</h5>
+                <button type="button" class="close" data-dismiss="modal" style="color:red">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="notes-box">
+                    <div class="notes-content">
+                        <div class="row my-3 justify-content-center">
+                            <div class="col-10 border formProgCreat">
+                                <form method="post" id="addMaterial">
+                                     <div class="row justify-content-center bg-light formProgCreat">
+                                         <div class="col-10 my-4 bg-light formProgCreat-IN">
+                                            <div class="row">
+                                                <div class="col-md-12 my-3"> 
+                                                    <div class="note-title">
+                                                       <label>Program Name</label>
+                                                        <select class="form-control custom-select" id="ProgramName" asp-items="@(new SelectList(@ViewBag.AllProgram,  "Id", "ProgramName" ))"></select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="note-description">
+                                                        <label>Mode Of Training</label>
+                                                        <select class="form-control custom-select" id="ModeOfTraining" asp-items="@(new SelectList(@ViewBag.ModeOfTraining,  "Id", "Name" ))"></select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="note-description">
+                                                        <label>Starting Date</label>
+                                                        <input id="StartingDate" type="Date" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 py-3 text-center">
+                                                    <button type="submit" class="btn btn-primary mr-2" onclick="programRegistration()" style="width:150px"><b>Update</b></button>
+                                                     <a asp-controller="Students" asp-action="StudentProgramIndex" class="btn btn-secondary" style="width:150px">Back</a>
+                                                 </div>
+                                            </div>
+                                         </div>
+                                     </div>
+                                 </form>
+                            </div>
+                        </div>
+                   </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+

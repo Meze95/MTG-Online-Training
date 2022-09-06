@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Contact Page";
+}
+
+<!-- Main Body area starts -->
+<div class="cent-row">
+  <h2>How to Reach Us?</h2>
+  <p>We can be reached in a number of ways. These include:</p>
+</div>
+
+<div class="map">
+  <div class="row justify-content-center">
+    <div class="col-md-4 map-box ">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.3361073508086!2d7.531440714842945!3d6.479045925475856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1044a5c8f50576b7%3A0x5614dcf3ce18cfea!2sBivisoft%20Limited!5e0!3m2!1sen!2sng!4v1658241043984!5m2!1sen!2sng" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="col-md-7 map-box ">
+      <div class="row">
+        <div class="col-md-5 add-box ml-3">
+        <h4>Visit our Corporate Office</h4>
+          <p>57 Chime Avenue,</p>
+          <p>New Haven, Independence Layout,</p>
+          <p>Enugu State,</p>
+          <p>Nigeria</p>
+          <p>Office phone numbers</p>
+          <p>Sales: +234-813-288-344</p>
+          <p>Support: +234-814-960-7825</p>
+        </div>
+
+        <div class="col-md-5 add-box ml-3">
+        <h4>Branch Office</h4>
+          <p>House 52, Rofo Estate</p>
+          <p>Odogwunya Ikorodu,</p>
+          <p>Lagos State,</p>
+          <p>Nigeria</p><br>
+          <h5>Email Us</h5>
+          <p>training@mtgolabl.com</p>
+          <p>Support@mtgolabl.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cent-row">
+  <h2>Drop Your Message</h2>
+  <p>Place all your requests here and we will get back to you through your personal details provided below as soon as possible.</p>
+</div>
+
+<div class="container fom">
+  <form action="/action_page.php">
+    <div class=row>
+       <div class="form-group col-md-6">
+          <label for="text">First Name:</label>
+          <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
+        </div>
+      <div class="form-group col-md-6">
+          <label for="text">Subject:</label>
+          <input type="text" class="form-control" id="subject" placeholder="Enter last Name" name="subject">
+      </div>
+    </div>
+
+    <div class=row>
+      <div class="form-group col-md-6">
+          <label for="text">Last Name:</label>
+          <input type="text" class="form-control" id="lname" placeholder="Enter last Name" name="lname">
+          <br>
+          <label for="number">Phone Number:</label>
+          <input type="number" class="form-control" id="phone" placeholder="Enter your phone number" name="phone">
+      </div>
+        <div class="form-group col-md-6">
+            <label for="Message">Message:</label>
+            <textarea class="form-control" rows="5" id="msg" placeholder="Enter your message" name="msg"></textarea>
+        </div>
+    </div>
+    <div class=row>
+        <div class="form-group col-md-6">
+          <label for="text">Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+          <br>
+          <label for="text">Company Name <small><i>(optional)</i></small>:</label>
+          <input type="text" class="form-control" id="BuziName" placeholder="Enter your business name" name="BuziName">
+        </div>
+
+        <div class="form-group col-md-6">
+          <br>
+          <img src="captcha.php" id="captcha_image"/><a id="captcha_reload" href="#">reload</a>
+          <br><br><br>
+          <label for="text">Enter Captcha Code Below *</label><br>
+          <input type="text" class="form-control" id="captcha" placeholder="Enter captcha code" name="captcha">
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="form-group col-md-6 ">
+            <button type="button" class="btn btn-info btn-block">Submit Message</button>
+        </div>
+    </div>
+  </form>
+</div>

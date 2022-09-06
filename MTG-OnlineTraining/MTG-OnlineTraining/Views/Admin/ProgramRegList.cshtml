@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MTG_OnlineTraining.Models.StudentPrograms>
+@{
+    ViewData["Title"] = "Registered Program Page";
+        Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<partial name="_notification" />
+<style>
+
+    body {
+        counter-reset: Serial; /* / Set the Serial counter to 0 /*/
+    }
+
+    tr td:first-child:before  {
+        counter-increment: Serial; /* / Increment the Serial counter /*/
+        content: counter(Serial); /*  / Display the counter /*/
+    }
+</style>
+<div class="mx-5 bg-white">
+<div class="container p-3 table-responsive">
+    <div class="row pt-4">
+        <div class="col-12 HDD pb-5">
+            <h1 Class="text-center">Program Registeration List</h1>
+        </div> 
+    </div>
+
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-hover table-info table-sm text-dark" style="width:100%; background-color: gray">
+                <thead class="thead-light bg-info text-white">
+                    <tr>
+                        <th>S/N</th>
+                        <th>User Name</th>
+                        <th>Program Name</th>
+                        <th>Duration</th>
+                        <th>Starting Date</th>
+                        <th>Ending Date</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    @foreach (var program in Model)
+                    {
+                        <tr>
+                            <td width="5%"></td>
+                            <td width="15%">@program.Trainees.UserName</td>
+                            <td width="30%">@program.AdminProgram.ProgramName</td>
+                            <td width="10%">@program.AdminProgram.Duration</td>
+                            <td width="15%">@program.StartingDate.ToShortDateString()</td>
+                            <td width="15%">@program.EndingDate.ToShortDateString()</td>
+                            @if(@program.IsActive == true)
+                            {
+                                <td width="10%" class="text-center"><a asp-controller="Admin" asp-action="ProgramDeactivation" asp-route-Id="@program.Id" ><i class="fa fa-power-off" style="font-size:50px;color:red"></i></a></td>
+                            }
+                            else
+                            {
+                                <td width="10%" class="text-center"><a asp-controller="Admin" asp-action="ProgramActivation" asp-route-Id="@program.Id" ><i class="fa fa-power-off" style="font-size:50px;color:green"></i></a></td>
+                            }
+                        </tr> 
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        { 
+            <div cclass="row p5 m-5">
+                <div class="col-md-12 text-center p-5 m5">
+                    <h2>No Record Found</h2>
+                </div>
+            </div>
+    }
+
+</div>
+</div>

@@ -1,0 +1,187 @@
+.contacts-left {
+	width: 92%;
+	float: left;	
+	box-sizing: border-box;
+}
+
+.contacts {
+	color: #009783;
+	font-family: Tahoma, Verdana, sans-serif;
+	float: right;
+	width: 8%;	
+	box-sizing: border-box;
+}
+
+@media(max-width:600px){
+	.contacts-left{
+			width: 100%;
+			text-align: center;
+	}
+	.contacts {
+		color: #009783;
+		font-family: Tahoma, Verdana, sans-serif;
+		width: 100%;
+		padding-left: 10px;
+	}
+
+	.contacts ul {
+		list-style-type: none;
+		padding-left: 10px;
+		padding-top: 2px;
+	}
+}
+
+.contacts ul{
+	list-style-type: none;
+	padding-right: 5px;
+	padding-top: 10px;
+	font-weight: bold;
+}
+
+.contacts ul li a {
+	color: #009783;
+	font-family: Tahoma, Verdana, sans-serif;
+	text-decoration: none;
+}
+
+.sticky-top {
+	background: #317166;
+
+}
+
+.clear-fix{
+	clear: both;
+}
+
+/* Header links */
+
+.LinkCol li a{
+	color: white;
+	font-size: 20px;
+	font-style: bold;
+}
+
+.LinkCol li a:hover{
+	color: #317166;
+	font-size:150%;
+	font-style: bold;
+}
+
+.Cname h2{
+	color: #009783;
+	font-family: Tahoma, Verdana, sans-serif;
+	padding: 10px;
+
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+  }
+
+.fom h2{
+	text-align: center;
+}
+
+.fom {
+	background: #f8f9fa;
+	border: 5px solid #317166;
+	border-radius: 25px;
+	padding-top: 20px;
+	padding-bottom: 25px;
+
+}
+
+
+/* Body styling */
+
+.cent-row{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.map{
+	background-image: url(../images/map.jpg);
+	background-size: cover;
+	background-repeat: no;
+	height: auto;
+	padding-top: 30px;
+	padding-bottom: 30px;
+
+}
+
+.map-box {
+	border-radius: 40px;
+	padding-top: 10px;
+	margin: 1%;
+
+}
+
+.map-box iframe{
+	border-radius: 40px;
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+}
+
+.add-box{
+	float: left;
+	width: 50%;
+	box-sizing: border-box;
+	font: white;
+	line-height: 1em;
+	color: white;
+}
+
+#main-footer{
+	color: #fff;
+	text-align: center;
+	padding:10px;
+}
+
+#main-footer p{
+    font-size: 15px;
+    font-style: normal;
+    color: white;
+    line-height: 0.8em;
+}
+
+.footer-top{
+	background: #317166;
+}
+
+.footer-top li{
+	line-height: 1.8em;
+}
+
+.footer-top h4{
+	text-align: center;
+}
+
+.footer-top ul{
+	list-style-type: none;
+}
+
+.HeadLink {
+	color: white;
+	font-weight:bolder;
+}
+
+.footer-top .col-md-3 {
+	border: 2px solid white;
+	border-radius: 40px;
+	box-shadow: 7px 7px 4px lightblue;
+	margin: 2%;
+}
+
+.social { 
+	text-align: center;
+	padding-bottom: 15px;
+}
+
+	.social li {
+		display: inline;
+		padding: 5px;
+	}
