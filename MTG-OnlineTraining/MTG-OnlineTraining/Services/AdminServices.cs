@@ -175,7 +175,7 @@ namespace MTG_OnlineTraining.Services
             }
         }
 
-        //Program Edit and Delete Get Action
+        //Admin Program Edit and Delete Get Action
         public AdminProgramViewModel EditandDeleteProgramView(int? Id)
         {
             var programToEdit = _db.AdminProgram.Find(Id);
@@ -196,11 +196,19 @@ namespace MTG_OnlineTraining.Services
             return null;
         }
 
+        //Admin Program Edit and Delete Post Action
         public string UpdateTheEditedProgram(AdminProgramViewModel adminProgramViewModel, int? Id)
         {
             string ProgramPixFilePath = string.Empty;
-            ProgramPixFilePath = UploadedFile(adminProgramViewModel.ProgramImageUrl, "/ProgramImageRep/");
-
+            if (adminProgramViewModel.ProgramImageUrl == null)
+            {
+                return ("Upload Image");
+            }
+            else
+            {
+                ProgramPixFilePath = UploadedFile(adminProgramViewModel.ProgramImageUrl, "/ProgramImageRep/");
+            }
+            
             var programToEdit = _db.AdminProgram.Find(Id);
             if (programToEdit != null)
             {
@@ -239,5 +247,48 @@ namespace MTG_OnlineTraining.Services
             }
         }
 
+        //Material Edit Post Action
+        public string UpdateEditedMaterial(MaterialsViewModel materialsViewModel, string base64)
+        {
+            if(base64 == null)
+            {
+                return ("Upload Training Document");
+            }
+            else if (materialsViewModel != null)
+            {
+                var OldMaterial = _db.Materials.Find(materialsViewModel.Id);
+
+                OldMaterial.AdminProgramId = materialsViewModel.AdminProgramId;
+                OldMaterial.Title = materialsViewModel.Title;
+                OldMaterial.FlowOrder = materialsViewModel.FlowOrder ;
+                OldMaterial.File = base64;
+
+                _db.Materials.Update(OldMaterial);
+                _db.SaveChanges();
+
+                return "Material Updated Successfully";
+            }
+            else
+            {
+                return ("Material Updated Failed");
+            }
+        }
+
+        //Materail Delete Post Action
+        public string DeleteSelectedMaterial(MaterialsViewModel materialsViewModel)
+        {
+            var OldMaterial = _db.Materials.Find(materialsViewModel.Id);
+            if (OldMaterial != null)
+            {
+                _db.Materials.Remove(OldMaterial);
+                _db.SaveChanges();
+
+                return "Program Deleted Successfully";
+            }
+            else
+            {
+                return ("Program Deletion Failed");
+            }
+        }
     }
 }

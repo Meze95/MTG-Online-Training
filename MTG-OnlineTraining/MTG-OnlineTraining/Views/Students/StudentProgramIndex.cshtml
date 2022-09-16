@@ -1,7 +1,9 @@
-﻿@model IEnumerable<MTG_OnlineTraining.Models.StudentPrograms>
+﻿@model MTG_OnlineTraining.Models.StudentPrograms
+@inject MTG_OnlineTraining.Services.IStudentServices _studentServices;
 @{
     ViewData["Title"] = "Registered Program Page";
     Layout = "~/Views/Shared/StudentLayout/_Layout.cshtml";
+    var programs = _studentServices.MyRegisteredPrograms(User.Identity.Name);
 }
 
 <partial name="_notification" />
@@ -28,7 +30,7 @@
             <br /><br />  
         </div>
 
-        @if(Model.Count() > 0)
+        @if(programs.Count() > 0)
         {
         <table class="table table-bordered table-hover table-info table-sm text-dark" style="width:100%; background-color: gray">
             <thead class="thead-light bg-info text-white">
@@ -37,13 +39,13 @@
                     <th>Name</th>
                     <th>Duration(days)</th>
                     <th>Starting Date</th>
-                    <th>Starting Date</th>
+                    <th>Ending Date</th>
                     <th>Status</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody class="bg-white">
-                @foreach (var program in Model)
+                @foreach (var program in programs)
                 {
                     <tr class="text-dark">
                         <td width="5%"></td>
@@ -61,9 +63,9 @@
                         }
 
                         <td width="15%"  class="text-center">
-                            <button type="button" class="btn btn-primary mr-2" >Edit</button>
-                            <button type="button" class="btn btn-secondary">Delete</button>
-                        </td> 
+                            <button type="button" class="btn btn-primary mr-2" id="add-notes" onclick="editProgram('@program.Id')" data-toggle="modal" data-target="#myEditModal">Edit</button>
+                            <button type="button" class="btn btn-secondary" id="add-notes" onclick="deleteProgram('@program.Id')" data-toggle="modal" data-target="#myDeleteModal">Delete</button>
+                         </td> 
                     </tr> 
                 }
             </tbody>
@@ -80,7 +82,7 @@
     </div>
 </div>
 
-<!-- Modal Add notes -->
+<!-- Modal Create Program -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="addnotesmodalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content border-0">
@@ -93,7 +95,6 @@
                     <div class="notes-content">
                         <div class="row my-3 justify-content-center">
                             <div class="col-10 border formProgCreat">
-                                <form method="post" id="addMaterial">
                                      <div class="row justify-content-center bg-light formProgCreat">
                                          <div class="col-10 my-4 bg-light formProgCreat-IN">
                                             <div class="row">
@@ -121,8 +122,7 @@
                                                  </div>
                                             </div>
                                          </div>
-                                     </div>
-                                 </form>
+                                  </div>
                             </div>
                         </div>
                    </div>
@@ -132,3 +132,92 @@
     </div>
 </div>
 
+<!-- Modal Edit Program -->
+<div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="addnotesmodalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-header bg-info text-white text-center">
+                <h5 class="modal-title text-white ">Edit Program</h5>
+                <button type="button" class="close" data-dismiss="modal" style="color:red">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="notes-box">
+                    <div class="notes-content">
+                        <div class="row my-3 justify-content-center">
+                            <div class="col-10 border formProgCreat">
+                                <div class="row justify-content-center bg-light formProgCreat">
+                                    <div class="col-10 my-4 bg-light formProgCreat-IN">
+                                    <div class="row">
+                                        <input id="editProgramId" hidden />
+                                        <div class="col-md-12 my-3"> 
+                                            <div class="note-title">
+                                                <label>Program Name</label>
+                                                <select class="form-control custom-select" id="editProgramName" asp-items="@(new SelectList(@ViewBag.AllProgram,  "Id", "ProgramName" ))"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="note-description">
+                                                <label>Mode Of Training</label>
+                                                <select class="form-control custom-select" id="editModeOfTraining" asp-items="@(new SelectList(@ViewBag.ModeOfTraining,  "Id", "Name" ))"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="note-description">
+                                                <label>Starting Date</label>
+                                                <input id="editStartingDate" type="Date" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 py-3 text-center">
+                                            <button type="submit" class="btn btn-primary mr-2" onclick="programRegistrationEdit()" style="width:150px"><b>Update</b></button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width:150px">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Delete Program -->
+<div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog" aria-labelledby="addnotesmodalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-body">
+                <div class="notes-box">
+                    <div class="notes-content">
+                        <div class="row my-3 justify-content-center">
+                            <div class="col-10 border formProgCreat">
+                                <div class="row justify-content-center bg-light formProgCreat">
+                                    <div class="col-10 my-4 bg-light">
+                                        <div class="row">
+                                            <input id="deleteProgramId" hidden />
+                                            <div class="col-md-12 my-3"> 
+                                                <div class="note-title text-center">
+                                                    <i class="fa fa-close" style="font-size:150px;color:red"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="note-description text-center">
+                                                    <h2>Are You Sure You Want To Delete?</h2>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 py-3 text-center">
+                                                <button type="submit" class="btn btn-danger mr-2" onclick="programRegistrationDelete()" style="width:150px"><b>Delete</b></button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width:150px">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

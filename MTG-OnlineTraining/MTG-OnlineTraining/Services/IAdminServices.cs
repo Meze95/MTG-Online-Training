@@ -16,5 +16,7 @@ namespace MTG_OnlineTraining.Services
         public AdminProgramViewModel EditandDeleteProgramView(int? Id);
         public string DeleteSelectedProgram(AdminProgramViewModel adminProgramViewModel, int? Id);
         public string UpdateTheEditedProgram(AdminProgramViewModel adminProgramViewModel, int? Id);
+        public string UpdateEditedMaterial(MaterialsViewModel materialsViewModel, string base64);
+        public string DeleteSelectedMaterial(MaterialsViewModel materialsViewModel);
     }
 }

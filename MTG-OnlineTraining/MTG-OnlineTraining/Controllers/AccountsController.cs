@@ -10,12 +10,14 @@ namespace MTG_OnlineTraining.Controllers
     public class AccountsController : Controller
     {
         private readonly IAccountServices _accountServices;
+        private readonly IEmailConfiguration _emailConfiguration;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public AccountsController(IAccountServices accountServices, UserManager<ApplicationUser> userManager)
+        public AccountsController(IAccountServices accountServices, UserManager<ApplicationUser> userManager, IEmailConfiguration emailConfiguration)
         {
             _accountServices = accountServices;
             _userManager = userManager;
+            _emailConfiguration = emailConfiguration;
         }
         //GET
         [HttpGet]
@@ -28,20 +30,38 @@ namespace MTG_OnlineTraining.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel registerViewModel)
         {
-            if (registerViewModel != null)
-            {
-                if (registerViewModel.Password == registerViewModel.ConfirmPassword & registerViewModel.Email != null)
-                {
-                    var registerr = _accountServices.UserRegistraion(registerViewModel).Result;
+            string linkToClick = HttpContext.Request.Scheme.ToString() + "://" +
+                                 HttpContext.Request.Host.ToString() + "/Accounts/EmailActivation";
 
-                    if (registerr.Contains("successful"))
-                    {
-                        TempData["Success"] = "Registraion Submitted successfully";
-                        return View("Login");
-                    }
-                }
+            var ussss = _emailConfiguration.SmtpUsername;
+
+            var registerr = _accountServices.UserRegistraion(registerViewModel, linkToClick).Result;
+
+            if (registerr.Contains("passport"))
+            {
+                TempData["error"] = "Upload Passport";
             }
-            TempData["error"] = "Registraion Failed";
+            else if (registerr.Contains("confirmation"))
+            {
+                TempData["error"] = "Password and it confirmation doesnot match";
+            }
+            else if (registerr.Contains("required"))
+            {
+                TempData["error"] = "Fill all the required fields";
+            }
+            else if (registerr.Contains("PhoneNumber"))
+            {
+                TempData["error"] = "Phone already Exist";
+            }
+            else if (registerr.Contains("Email"))
+            {
+                TempData["error"] = "Email already Exist";
+            }
+            else
+            {
+                TempData["Success"] = "Registraion Submitted successfully";
+                return View("Login");
+            }
             return View(registerViewModel);
         }
 
@@ -111,7 +131,22 @@ namespace MTG_OnlineTraining.Controllers
             _accountServices.LogOut();
             return RedirectToAction("Index", "Home");
         }
-      
+
+        public IActionResult EmailActivation(string userId)
+        {
+            var ActiveMe = _accountServices.StudentActivation(userId);
+
+            if (ActiveMe.Contains("Successfully"))
+            {
+                TempData["Success"] = "Activated successfully";
+                return View("Login");
+
+            }
+            TempData["error"] = "Activation Failed";
+            return View("Register");
+        }
+
+
         public IActionResult Activation(string userId)
         {
             var ActiveMe = _accountServices.StudentActivation(userId);

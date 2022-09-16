@@ -257,7 +257,7 @@ namespace MTG_OnlineTraining.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AdminProgram");
+                    b.ToTable("AdminProgram", (string)null);
                 });
 
             modelBuilder.Entity("MTG_OnlineTraining.Models.Materials", b =>
@@ -288,7 +288,7 @@ namespace MTG_OnlineTraining.Migrations
 
                     b.HasIndex("AdminProgramId");
 
-                    b.ToTable("Materials");
+                    b.ToTable("Materials", (string)null);
                 });
 
             modelBuilder.Entity("MTG_OnlineTraining.Models.StudentPrograms", b =>
@@ -323,7 +323,7 @@ namespace MTG_OnlineTraining.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("StudentPrograms");
+                    b.ToTable("StudentPrograms", (string)null);
                 });
 
             modelBuilder.Entity("MTG_OnlineTraining.Models.ApplicationUser", b =>

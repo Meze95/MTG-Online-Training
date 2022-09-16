@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MTG_OnlineTraining.Data;
 using MTG_OnlineTraining.Models;
 using MTG_OnlineTraining.Services;
 using MTG_OnlineTraining.ViewModel;
+using Newtonsoft.Json;
 
 namespace MTG_OnlineTraining.Controllers
 {
@@ -12,12 +14,16 @@ namespace MTG_OnlineTraining.Controllers
         private readonly IStudentServices _studentServices;
         private readonly IAdminServices _adminServices;
         private readonly IAccountServices _accountServices;
-        public StudentsController(UserManager<ApplicationUser> userManager, IAdminServices adminServices, IStudentServices studentServices, IAccountServices accountServices)
+        private readonly IDropDownServices _dropDownServices;
+        private readonly ApplicationDbConntext _db;
+        public StudentsController(UserManager<ApplicationUser> userManager, IAdminServices adminServices, IStudentServices studentServices, IAccountServices accountServices, ApplicationDbConntext db, IDropDownServices dropDownServices)
         {
             _userManager = userManager;
             _adminServices = adminServices;
             _studentServices = studentServices;
             _accountServices = accountServices;
+            _db = db;
+            _dropDownServices = dropDownServices;
         }
 
         [HttpGet]
@@ -96,10 +102,7 @@ namespace MTG_OnlineTraining.Controllers
         {
             ViewBag.ModeOfTraining = _studentServices.GetDropDownEnumsList();
             ViewBag.AllProgram = _adminServices.GetProgramFromTheTable();
-
-            var username = User.Identity.Name;
-            var myProgramList = _studentServices.MyRegisteredPrograms(username);
-            return View(myProgramList);
+            return View();
         }
 
         //GET
@@ -114,36 +117,126 @@ namespace MTG_OnlineTraining.Controllers
 
         //POST
         [HttpPost]
-        public IActionResult StudentProgramCreate(StudentProgramsViewModel studentProgramsViewModel)
+        public IActionResult StudentProgramCreate(string studentProgramsViewModel)
         {
             ViewBag.ModeOfTraining = _studentServices.GetDropDownEnumsList();
             ViewBag.AllProgram = _adminServices.GetProgramFromTheTable();
+            var newStudentProgram = JsonConvert.DeserializeObject<StudentProgramsViewModel>(studentProgramsViewModel);
             var username = User.Identity.Name;
 
             if (studentProgramsViewModel != null)
             {
-                var newProgramRegistration = _studentServices.StudentProgramRegList(studentProgramsViewModel, username);
+                var newProgramRegistration = _studentServices.StudentProgramRegList(newStudentProgram, username);
                 if (newProgramRegistration.Contains("Successfully"))
                     {
                         TempData["Success"] = "Program Registered successfully";
-                        return RedirectToAction("StudentProgramIndex");
+                        return Json(new { isError = false, msg = "Program Registered successfully" });
                     }
+                else if (newProgramRegistration.Contains("already"))
+                {
+                    return Json(new { isError = true, msg = "Program Alraedy Registered" });
+                }
             }
             TempData["error"] = "Program Registraion Failed";
-            return View();
+            return Json(new { isError = true, msg = "Program Registraion Failed" });
+        }
+        
+
+        [HttpGet]
+        public JsonResult EditStudentProgramRegistration(Guid Id)
+        {
+            try
+            {
+                ViewBag.ModeOfTraining = _studentServices.GetDropDownEnumsList();
+                ViewBag.AllProgram = _dropDownServices.GetPrograms().Result;
+                if (Id != null)
+                {
+                    var program = _db.StudentPrograms.Where(p => p.Id == Id).FirstOrDefault();
+                    return Json(program);
+                }
+                else
+                {
+                    return Json(new { isError = true, msg = "Program Not Found" });
+                }
+            }
+            catch (Exception exp)
+            {
+
+                throw exp;
+            }
+        }
+
+        //POST ACTION FOR STUDENT PROGRAM EDIT
+        [HttpPost]
+        public IActionResult StudentProgramEdit(string studentProgramsViewModel)
+        {
+            if (studentProgramsViewModel == null)
+            {
+                return NotFound();
+            }
+            var programDetails = JsonConvert.DeserializeObject<StudentProgramsViewModel>(studentProgramsViewModel);
+            var editedProgram = _studentServices.UpdateEditedStudentProgram(programDetails);
+            if (editedProgram.Contains("Started"))
+            {
+                TempData["error"] = "Program Already Started";
+                return Json(new { isError = true, msg = "Program Already Started" });
+            }
+            else if (editedProgram.Contains("Successfully"))
+            {
+                TempData["Success"] = "Program Updated successfully";
+                return Json(new { isError = false, msg = "Program Updated successfully" });
+            }
+            else
+                TempData["error"] = "Program Update Failed";
+                return Json(new { isError = true, msg = "Program Update Failed" });
         }
 
 
         [HttpGet]
-        public IActionResult StudentProgramEdit()
+        public JsonResult DeleteStudentProgramRegistration(Guid Id)
         {
-            return View();
+            try
+            {
+                if (Id != null)
+                {
+                    var program = _db.StudentPrograms.Where(p => p.Id == Id).FirstOrDefault();
+                    return Json(program);
+                }
+                else
+                {
+                    return Json(new { isError = true, msg = "Program Not Found" });
+                }
+            }
+            catch (Exception exp)
+            {
+
+                throw exp;
+            }
         }
 
-        [HttpGet]
-        public IActionResult StudentProgramDelete()
+        //POST ACTION FOR STUDENT PROGRAM DELETE
+        [HttpPost]
+        public IActionResult StudentProgramDelete(string studentProgramsViewModel)
         {
-            return View();
+            if (studentProgramsViewModel == null)
+            {
+                return NotFound();
+            }
+            var programDetails = JsonConvert.DeserializeObject<StudentProgramsViewModel>(studentProgramsViewModel);
+            var deleteProgram = _studentServices.DeleteSelectedStudentProgram(programDetails);
+            if (deleteProgram.Contains("Started"))
+            {
+                TempData["error"] = "Program Already Started";
+                return Json(new { isError = true, msg = "Program Already Started" });
+            }
+            else if (deleteProgram.Contains("Successfully"))
+            {
+                TempData["Success"] = "Program Deleted successfully";
+                return Json(new { isError = false, msg = "Program Deleted successfully" });
+            }
+            else
+                TempData["error"] = "Program Update Failed";
+            return Json(new { isError = true, msg = "Program Deletion Failed" });
         }
 
         [HttpGet]

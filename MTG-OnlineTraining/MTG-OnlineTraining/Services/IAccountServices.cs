@@ -5,7 +5,7 @@ namespace MTG_OnlineTraining.Services
 {
     public interface IAccountServices
     {
-        Task<string> UserRegistraion(RegisterViewModel registerViewModel);
+        Task<string> UserRegistraion(RegisterViewModel registerViewModel, string linkToClick);
         Task<string> AdminRegistraion(AdminRegistrationViewModel adminRegistrationViewModel);
         Task<bool> UserLogin(LoginViewModel loginViewModel);
         Task<bool> LogOut();

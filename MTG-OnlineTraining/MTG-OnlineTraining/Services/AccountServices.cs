@@ -12,19 +12,21 @@ namespace MTG_OnlineTraining.Services
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ApplicationDbConntext _db;
         private readonly IAdminServices _adminServices;
+        private readonly IEmailServices _emailServices;
         private bool isPersistent;
         private bool lockoutOnFailure;
 
-        public AccountServices(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IWebHostEnvironment webHostEnvironment, ApplicationDbConntext db, IAdminServices adminServices)
+        public AccountServices(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IWebHostEnvironment webHostEnvironment, ApplicationDbConntext db, IAdminServices adminServices, IEmailServices emailServices)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _webHostEnvironment = webHostEnvironment;
             _db = db;
             _adminServices = adminServices;
+            _emailServices = emailServices;
         }
 
-        public async Task<string> UserRegistraion(RegisterViewModel registerViewModel)
+        public async Task<string> UserRegistraion(RegisterViewModel registerViewModel, string linkToClick)
         {
             string passportFilePath = string.Empty;
             if(registerViewModel.ImageUrl == null)
@@ -35,8 +37,25 @@ namespace MTG_OnlineTraining.Services
             {
                 passportFilePath = _adminServices.UploadedFile(registerViewModel.ImageUrl, "/StudentsPassport/");
             }
+            if (registerViewModel.Password != registerViewModel.ConfirmPassword)
+            {
+                return ("Password does not match with its confirmation");
+            }
+            else if (registerViewModel.FirstName == null && registerViewModel.LastName == null && registerViewModel.DOB == null && registerViewModel.PhoneNumber == null && registerViewModel.StateOfOrigin == null && registerViewModel.Address == null && registerViewModel.Email == null)
+            {
+                return ("Fill all the required fields");
+            }
             var EmailCheck = await _userManager.FindByEmailAsync(registerViewModel.Email);
-            if (EmailCheck == null)
+            var phoneCheck = await _userManager.FindByEmailAsync(registerViewModel.PhoneNumber);
+            if (phoneCheck != null)
+            {
+                return ("PhoneNumber Already Exist");
+            }
+            else if (EmailCheck != null)
+            {
+                return ("Email Already Exist");
+            }
+            else 
             {
                 var users = new ApplicationUser
                 {
@@ -48,10 +67,9 @@ namespace MTG_OnlineTraining.Services
                     PhoneNumber = registerViewModel.PhoneNumber,
                     StateOfOrigin = registerViewModel.StateOfOrigin,
                     Address = registerViewModel.Address,
-                    ModeOfTraining = registerViewModel.ModeOfTraining,
                     Passport = passportFilePath,
                     Email = registerViewModel.Email,
-                    Deactivated = false,
+                    Deactivated = true,
                     IsAdmin = false,
                 };
 
@@ -63,6 +81,14 @@ namespace MTG_OnlineTraining.Services
                     if (createdStudent != null)
                     {
                         await _userManager.AddToRoleAsync(createdStudent, "Student");
+                        string toEmail = createdStudent.Email;
+                        string subject = "Registration Initiated";
+                        string message = "Dear " + createdStudent.FirstName + ", You Initiated a registraion in our platform" + " Please click on the link below to complete your registration" + "<br>" +
+                               "<a  href='" + linkToClick + "?userId=" +  createdStudent.Id + "' target='_blank'>" + "<button style='color:white; background-color:#018DE4; padding:10px; border:10px;'>Activate</button>" + "</a>";
+
+                        _emailServices.SendEmail(toEmail, subject, message);
+
+                        return ("Please Log into you mail to complete your registraion");
                     }
                     return ("Account registered successful");
                 }

@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using MTG_OnlineTraining.Models;
 using Microsoft.AspNetCore.Identity;
 using MTG_OnlineTraining.Services;
+using MTG_OnlineTraining.MTGConfigs;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -18,9 +20,15 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.Password.RequireNonAlphanumeric = false;
 }).AddEntityFrameworkStores<ApplicationDbConntext>();
 
+builder.Services.AddSingleton<IEmailConfiguration>(builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+builder.Services.AddTransient<IEmailServices, EmailServices>();
+builder.Services.AddSingleton<IGeneralConfiguration>(builder.Configuration.GetSection("GeneralConfiguration").Get<GeneralConfiguration>());
+
 builder.Services.AddScoped<IAccountServices, AccountServices>();
 builder.Services.AddScoped<IAdminServices, AdminServices>();
 builder.Services.AddScoped<IStudentServices, StudentServices>();
+builder.Services.AddScoped<IDropDownServices, DropDownServices>();
+
 
 var app = builder.Build();
 

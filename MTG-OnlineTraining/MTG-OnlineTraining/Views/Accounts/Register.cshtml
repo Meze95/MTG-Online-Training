@@ -20,12 +20,12 @@
                                 <div class="row">
                                     <div asp-validation-summary="ModelOnly" class="text-denger"></div>
                                     <div class="col-md-7 pb-">
-                                        <label>First Name:</label>
+                                        <label><b class="text-danger">*</b>First Name:</label>
                                         <input type="text" class="form-control" asp-for="FirstName" placeholder="Enter First Name" />
                                         <span asp-validation-for="FirstName" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-5 pb-4">
-                                        <label>Last Name:</label>
+                                        <label><b class="text-danger">*</b>Last Name:</label>
                                         <input type="text" class="form-control" asp-for="LastName" placeholder="Enter last Name">
                                         <span asp-validation-for="LastName" class="text-danger"></span>
                                     </div>
@@ -36,50 +36,50 @@
                                         <input type="text" class="form-control" asp-for="MiddleName" placeholder="Enter Middle Name">
                                     </div>
                                     <div class="col-md-7 pb-4">
-                                        <label>Date of Birth:</label>
+                                        <label><b class="text-danger">*</b>Date of Birth:</label>
                                         <input type="date" class="form-control" asp-for="DOB" placeholder="Date of birth">
                                         <span asp-validation-for="DOB" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-7 pb-4">
-                                         <label>Phone Number:</label>
+                                         <label><b class="text-danger">*</b>Phone Number:</label>
                                         <input type="number" class="form-control" asp-for="PhoneNumber" placeholder="Enter you phone number">
                                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-5 pb-4">
-                                        <label>State of Origin:</label>
+                                        <label><b class="text-danger">*</b>State of Origin:</label>
                                         <input type="text" class="form-control" asp-for="StateOfOrigin" placeholder="State of Residient">
                                         <span asp-validation-for="StateOfOrigin" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 pb-4">
-                                         <label>Residient Address</label>
+                                         <label><b class="text-danger">*</b>Residient Address</label>
                                          <input type="text" class="form-control" asp-for="Address" placeholder="Enter residient address">
                                          <span asp-validation-for="Address" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-5 pb-4">
-                                         <label>Upload Passport:</label>
+                                         <label><b class="text-danger">*</b>Upload Passport:</label>
                                          <input type="file" asp-for="ImageUrl">
                                          <span asp-validation-for="ImageUrl" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-7 pb-4">
-                                        <label>Email:</label>
+                                        <label><b class="text-danger">*</b>Email:</label>
                                         <input type="email" class="form-control" asp-for="Email" placeholder="Enter email">
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 pb-4">
-                                         <label>Password:</label>
+                                         <label><b class="text-danger">*</b>Password:</label>
                                          <input type="password" class="form-control" asp-for="Password" placeholder="Enter password">
                                          <span asp-validation-for="Password" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-6 pb-4">
-                                        <label>Confirm Password:</label>
+                                        <label><b class="text-danger">*</b>Confirm Password:</label>
                                         <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Confirm password">
                                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                     </div>

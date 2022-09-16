@@ -6,7 +6,9 @@ namespace MTG_OnlineTraining.ViewModel
 {
     public class StudentProgramsViewModel
     {
+        
         public int? AdminProgramId { get; set; }
+        public Guid Id { get; set; }
         public virtual AdminProgram AdminProgram { get; set; }
         public string UserId { get; set; }
         public virtual ApplicationUser Trainees { get; set; }

@@ -77,10 +77,10 @@
                               <td width="10%" class="text-center"><i class="fa fa-file-o" style="font-size:50px"></i></td>
                           }      
                           <td width="10%" class="text-center">@material.FlowOrder</td>
-                          <td width="20%" class="text-center">
-                              <a asp-controller="Admin" asp-action="AdminMaterialEdit" class="mr-1"><i class="fa fa-edit fa-2x" aria-hidden="true" style="color:#009783"></i></a>
-                              <a asp-controller="Admin" asp-action="AdminMaterialDelete" class="ml-1"><i class="fa fa-trash-o fa-2x" aria-hidden="true" style="color:red"></i></a>
-                          </td> 
+                          <td width="20%" class="text-center pt-3">
+                            <a class="mr-2" id="add-notes" onclick="editMaterail('@material.Id')" data-toggle="modal" data-target="#myEditModal"><i class="fa fa-edit fa-2x" aria-hidden="true" style="color:#009783"></i></a>
+                            <a  id="add-notes" onclick="deleteMaterial('@material.Id')" data-toggle="modal" data-target="#myDeleteModal"><i class="fa fa-trash-o fa-2x" aria-hidden="true" style="color:red"></i></a>
+                         </td> 
                      </tr> 
                  }
               </tbody>
@@ -96,4 +96,98 @@
         }
     </div>
 
+<!-- Modal Edit Material -->
+<div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="addnotesmodalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-header bg-info text-white text-center">
+                <h5 class="modal-title text-white ">Edit Material</h5>
+                <button type="button" class="close" data-dismiss="modal" style="color:red">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="notes-box">
+                    <div class="notes-content">
+                        <div class="row my-3 justify-content-center">
+                            <div class="col-10 border formProgCreat">
+                                <div class="row justify-content-center bg-light formProgCreat">
+                                    <div class="col-10 my-4 bg-light formProgCreat-IN">
+                                    <div class="row">
+                                        <input id="editMateralId" hidden />
+                                        <div class="col-md-12 my-3"> 
+                                            <div class="note-title">
+                                                <label>Program Name</label>
+                                                <select class="form-control custom-select" id="editMaterialName" asp-items="@(new SelectList(@ViewBag.AllProgram,  "Id", "ProgramName" ))"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="note-description">
+                                                <label>Title</label>
+                                                <input id="editMaterialTitle" type="text" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="note-description">
+                                                <label>Flow Order</label>
+                                                <input id="editMaterialFlowOrder" type="number" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="note-description">
+                                                <label>File</label>
+                                                <input id="editMaterialFile" type="file" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 py-3 text-center">
+                                            <button type="submit" class="btn btn-primary mr-2" onclick="materialEditPost()" style="width:150px"><b>Update</b></button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width:150px">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Modal Delete Program -->
+<div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog" aria-labelledby="addnotesmodalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-body">
+                <div class="notes-box">
+                    <div class="notes-content">
+                        <div class="row my-3 justify-content-center">
+                            <div class="col-10 border formProgCreat">
+                                <div class="row justify-content-center bg-light formProgCreat">
+                                    <div class="col-10 my-4 bg-light">
+                                        <div class="row">
+                                            <input id="deleteProgramId" hidden />
+                                            <div class="col-md-12 my-3"> 
+                                                <div class="note-title text-center">
+                                                    <i class="fa fa-close" style="font-size:150px;color:red"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <div class="note-description text-center">
+                                                    <h2>Are You Sure You Want To Delete?</h2>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 py-3 text-center">
+                                                <button type="submit" class="btn btn-danger mr-2" onclick="materialDelete()" asp-route-Id="" style="width:150px"><b>Delete</b></button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width:150px">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

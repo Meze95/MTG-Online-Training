@@ -4,6 +4,7 @@ using MTG_OnlineTraining.Data;
 using MTG_OnlineTraining.Models;
 using MTG_OnlineTraining.Services;
 using MTG_OnlineTraining.ViewModel;
+using Newtonsoft.Json;
 
 namespace MTG_OnlineTraining.Controllers
 {
@@ -14,14 +15,16 @@ namespace MTG_OnlineTraining.Controllers
         private readonly IAccountServices _accountServices;
         private readonly IStudentServices _studentServices;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IDropDownServices _dropDownServices;
 
-        public AdminController(ApplicationDbConntext db, IAdminServices adminServices, UserManager<ApplicationUser> userManager, IAccountServices accountServices, IStudentServices studentServices)
+        public AdminController(ApplicationDbConntext db, IAdminServices adminServices, UserManager<ApplicationUser> userManager, IAccountServices accountServices, IStudentServices studentServices, IDropDownServices dropDownServices)
         {
             _db = db;
             _adminServices = adminServices;
             _userManager = userManager;
             _accountServices = accountServices;
             _studentServices = studentServices;
+            _dropDownServices = dropDownServices;
         }
 
         //GET
@@ -99,11 +102,17 @@ namespace MTG_OnlineTraining.Controllers
                 return NotFound();
             }
             var programToEdit = _adminServices.UpdateTheEditedProgram(adminProgramViewModel, Id);
-            if(programToEdit.Contains("Successfully"))
+            if (programToEdit.Contains("Upload"))
+            {
+                TempData["error"] = "Upload Image";
+                return View(adminProgramViewModel);
+            }
+            else if (programToEdit.Contains("Successfully"))
             {
                 TempData["Success"] = "Program Updated successfully";
                 return RedirectToAction("AdminProgramIndex");
             }
+            else
             TempData["error"] = "Program Update Failed";
             return View(adminProgramViewModel);
         }
@@ -181,6 +190,55 @@ namespace MTG_OnlineTraining.Controllers
             ViewBag.AllProgram = _adminServices.GetProgramFromTheTable();
             return View();
         }
+
+        [HttpGet]
+        public JsonResult EditMaterialView(int Id)
+        {
+            try
+            {
+                ViewBag.AllProgram = _dropDownServices.GetPrograms().Result;
+                if (Id != null)
+                {
+                    var material = _db.Materials.Where(m => m.Id == Id).FirstOrDefault();
+                    return Json(material);
+                }
+                else
+                {
+                    return Json(new { isError = true, msg = "Material Not Found" });
+                }
+            }
+            catch (Exception exp)
+            {
+
+                throw exp;
+            }
+        }
+
+        //POST ACTION FOR STUDENT PROGRAM EDIT
+        [HttpPost]
+        public IActionResult EditMaterialPost(string materialsViewModel, string base64)
+        {
+            if (materialsViewModel == null)
+            {
+                return NotFound();
+            }
+            var materailDetails = JsonConvert.DeserializeObject<MaterialsViewModel>(materialsViewModel);
+            var editedMaterail = _adminServices.UpdateEditedMaterial(materailDetails, base64);
+            if (editedMaterail.Contains("Document"))
+            {
+                return Json(new { isError = true, msg = "Training File Cannot be Empty, please Upload" });
+            }
+            else if (editedMaterail.Contains("Successfully"))
+            {
+                return Json(new { isError = false, msg = "Material Updated successfully" });
+            }
+            else
+            {
+                return Json(new { isError = true, msg = "Material Update Failed" });
+            }
+        }
+
+
 
         public IActionResult AdminMaterialDelete()
         {
